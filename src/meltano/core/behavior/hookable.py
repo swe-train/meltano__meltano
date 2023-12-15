@@ -22,11 +22,11 @@ class hook:  # noqa: N801
     accordingly.
     """
 
-    def __init__(self, hook_name, can_fail=False):
+    def __init__(self, hook_name, can_fail=False):  # noqa: D107
         self.name = hook_name
         self.can_fail = can_fail
 
-    def __call__(self, func):
+    def __call__(self, func):  # noqa: D102
         func.__hook__ = self  # noqa: WPS609
         return func
 
@@ -37,7 +37,7 @@ class Hookable(type):
     Hooks are registered in declaration order.
     """
 
-    def __new__(cls, name, bases, dct):
+    def __new__(cls, name, bases, dct):  # noqa: D102
         new_type = type.__new__(cls, name, bases, dct)  # noqa: WPS609
         new_type.__hooks__ = {}  # noqa: WPS609
 
@@ -54,7 +54,7 @@ class Hookable(type):
 
         return new_type
 
-    def __prepare__(cls, bases, **kwds):
+    def __prepare__(cls, bases, **kwds):  # noqa: D105
         return OrderedDict()
 
 

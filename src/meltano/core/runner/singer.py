@@ -1,4 +1,4 @@
-from __future__ import annotations
+from __future__ import annotations  # noqa: D100
 
 import asyncio
 import subprocess
@@ -209,7 +209,7 @@ class SingerRunner(Runner):
         logger.info(f"\textractor: {tap.plugin.name} at '{tap.exec_path()}'")  # noqa: G004
         logger.info(f"\tloader: {target.plugin.name} at '{target.exec_path()}'")  # noqa: G004
 
-    async def run(
+    async def run(  # noqa: D102
         self,
         extractor_log=None,
         loader_log=None,
