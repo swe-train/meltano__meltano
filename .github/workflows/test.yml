@@ -94,6 +94,22 @@ jobs:
     - name: Check out the repository
       uses: actions/checkout@v4.1.4
 
+    - name: Upgrade pip
+      env:
+        PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/resources/constraints.txt
+      run: |
+        pip install pip
+        pip --version
+
+    - name: Upgrade pip in virtual environments
+      shell: python
+      run: |
+        import os
+        import pip
+
+        with open(os.environ["GITHUB_ENV"], mode="a") as io:
+            print(f"VIRTUALENV_PIP={pip.__version__}", file=io)
+
     - name: Install Poetry
       env:
         PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/resources/constraints.txt

@@ -8,6 +8,7 @@ from collections import Counter, abc
 from copy import deepcopy
 from http import HTTPStatus
 
+import pip
 import pytest
 import requests
 from requests.adapters import BaseAdapter
@@ -52,6 +53,11 @@ def pytest_runtest_setup(item):
     # both as SYSTEM and WAREHOUSE.
     if backend_marker and backend_marker.args[0] != PYTEST_BACKEND:
         pytest.skip()
+
+
+def pytest_report_header() -> list[str]:
+    """Return a list of strings to be displayed in the header of the report."""
+    return [f"pip: {pip.__version__}"]
 
 
 @pytest.fixture(scope="session")
